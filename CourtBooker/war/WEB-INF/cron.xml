@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/courtbooker</url>
+    <schedule>every saturday, sunday 00:05</schedule>
+    <timezone>Europe/London</timezone>
+  </cron>
+  <cron>
+    <url>/reminder</url>
+    <schedule>every day 20:00</schedule>
+    <timezone>Europe/London</timezone>
+  </cron>
+</cronentries>
