@@ -15,15 +15,20 @@ import com.utilties.util.gmail.GmailSender;
 
 public class ReminderSender {
 	private CourtUtil courtUtil = new CourtUtil();
-	private CourtCancel canceller  = new CourtCancel();
+	
 	public String isBookedTomorrow () throws Exception{
 		String subject ="";
 		Calendar tomorrowCal = Calendar.getInstance();
 		tomorrowCal.add(Calendar.DATE, 1);
 		Date tomorrow = tomorrowCal.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		ArrayList<Court> bookedTimes = canceller.isBooked(tomorrow);
-		
+    	CourtCancel canceller1= new CourtCancel("bhatti","143113141");
+    	ArrayList<Court> bookedTimes = canceller1.isBooked(tomorrow);
+    	
+    	CourtCancel canceller2= new CourtCancel("singh","gpsingh");
+    	
+    	ArrayList<Court> bookedTimes2 = canceller2.isBooked(tomorrow);
+    	bookedTimes.addAll(bookedTimes2);
 		if(bookedTimes.size() >0) {
 			 subject =  sdf.format(tomorrow)+ " - Court number " + bookedTimes.get(0).getCourtNumber() + " booked from " +  bookedTimes.get(0).getDisplayTime()
 					+ " to " + bookedTimes.get(bookedTimes.size()-1).getDisplayTime();

@@ -33,8 +33,10 @@ public class CourtCancelServlet extends HttpServlet{
 	                 }
 	                if (!dateStr.isEmpty()){
 	                	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	                	CourtCancel canceller= new CourtCancel();
-	                	canceller.cancelDay(sdf.parse(dateStr));
+	                	CourtCancel canceller1= new CourtCancel("bhatti","143113141");
+	                	canceller1.cancelDay(sdf.parse(dateStr));
+	                	CourtCancel canceller2= new CourtCancel("singh","gpsingh");
+	                	canceller2.cancelDay(sdf.parse(dateStr));
 	                }
 	                
 	                

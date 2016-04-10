@@ -14,7 +14,7 @@ public class CourtUtil {
 //	public static int[] COURT_NUMBERS = {30,31,54,55,56,57};
 	public static String LOGIN_URL  = "http://mail.theparklangleyclub.co.uk:82/source1/index.php";
 	
-	public HtmlForm login ( ) throws Exception
+	public HtmlForm login (String userId, String password ) throws Exception
 	{
 		  WebClient wb = new WebClient ();
 		  HtmlPage p = (HtmlPage) wb.getPage(LOGIN_URL);
@@ -24,9 +24,11 @@ public class CourtUtil {
 		  HtmlTextInput logonPW = (HtmlTextInput) f.getInputByName("LogonPW");
 		  HtmlSubmitInput submit = (HtmlSubmitInput) f.getInputByName("logonSubmit");
 		  
+		  logonU.setValueAttribute(userId);
+		  logonPW.setValueAttribute(password);
 		  
-		  logonU.setValueAttribute("bhatti");
-		  logonPW.setValueAttribute("143113141");
+//		  logonU.setValueAttribute("bhatti");
+//		  logonPW.setValueAttribute("143113141");
 		  
 		  HtmlPage menuPage = (HtmlPage) submit.click();
 		  HtmlForm menuForm= menuPage.getFormByName("Form");

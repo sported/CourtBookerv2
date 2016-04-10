@@ -17,27 +17,41 @@ import com.utilties.util.CourtUtil;
 public class CourtBooker {
 	private CourtUtil htmlUtil = new CourtUtil();
 	
-	 private String[] courtTimes = {
-			 "bcsynp.php?a=56|720|80|9|",
-			 "bcsynp.php?a=56|750|80|9|",
-			 "bcsynp.php?a=56|780|80|9|",
-			 "bcsynp.php?a=56|810|80|9|"
-	 };
-	 public CourtBooker (String url) throws Exception {
+//	 private String[] courtTimes = {
+//			 "bcsynp.php?a=56|720|80|9|",
+//			 "bcsynp.php?a=56|750|80|9|",
+//			 "bcsynp.php?a=56|780|80|9|",
+//			 "bcsynp.php?a=56|810|80|9|"
+//	 };
+	 
+	 private int[] courtTimes = {30,31,54,55,56,57};
+	 
+	 private String url = "bcsynp.php?a=";
+	 private String end = "|80|9|";
+	 private int courtNumber;
+	
+	 public CourtBooker (String userid, String password, int courtNumber, int startTime)  {
+		 this.userid= userid;
+		 this.password = password;
+		 this.courtNumber= courtNumber;
+		 this.startTime = startTime;
 	 
 	 }
 	 
 	 public void book () throws Exception {
 	 
-	  HtmlForm menuForm= htmlUtil.login();
+	  HtmlForm menuForm= htmlUtil.login(userid, password);
 	  
 	 
 	  //Calendar Page
 	  HtmlPage calendarPage =htmlUtil.selectCourt(menuForm);
 	  HtmlPage calendarPage2Weeks = htmlUtil.nextWeek(htmlUtil.nextWeek(calendarPage));
-	  for (String courtTime:courtTimes) {
+	  int numberSlot = 4;
+	  for (int i=0; i<numberSlot; i++) {
+		  String courtTime = url+Integer.toString(courtTimes[courtNumber-1])+"|"+Integer.toString(startTime)+end;
 		  calendarPage2Weeks = bookCourt(calendarPage2Weeks, courtTime);
-		//  Thread.sleep(2000);
+		  startTime = startTime +30;
+	
 	  }
 	 
 	 }
@@ -73,13 +87,49 @@ public class CourtBooker {
 	 public static void main (String args[]) throws Exception {
 	  
 		 try {
-		 CourtBooker booker = new CourtBooker ("http://mail.theparklangleyclub.co.uk:82/source1/index.php");
-		 booker.book ();
+		// CourtBooker booker = new CourtBooker ("http://mail.theparklangleyclub.co.uk:82/source1/index.php");
+		// booker.book ();
 		 } catch (Exception ex){
 			 EmailSender.send(ex);
 		 }
-	  
 	 
 	 }
+	 
+	 private int startTime;
+	 private String userid;
+	 private String password;
+	 
+	 public int getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(int startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getCourtNumber() {
+		return courtNumber;
+	}
+
+	public void setCourtNumber(int courtNumber) {
+		this.courtNumber = courtNumber;
+	}
+
 	 
 }

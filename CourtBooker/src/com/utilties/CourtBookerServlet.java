@@ -45,9 +45,12 @@ public class CourtBookerServlet extends HttpServlet {
       throws IOException, ServletException {
 	  
 		try {
-			 CourtBooker booker = new CourtBooker ("http://mail.theparklangleyclub.co.uk:82/source1/index.php");
+			 CourtBooker booker1 = new CourtBooker ("bhatti","143113141",5,720 );
+			 booker1.book ();
+			 CourtBooker booker2 = new CourtBooker ("singh","gpsingh",5,840 );
+			 booker2.book ();
 			 resp.getWriter().println("Done");
-			 booker.book ();
+			 
 			 } catch (Exception ex){
 			  try{
 			    EmailSender.send( ex);

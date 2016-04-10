@@ -18,12 +18,16 @@ import java.util.Date;
 public class CourtCancel {
 	private CourtUtil htmlUtil = new CourtUtil();
 	
+	public CourtCancel(String userId, String password){
+		this.userid = userId;
+		this.password = password;
+	}
 	 
 	public ArrayList <Court> isBooked (Date date) throws Exception
 	{
 		
 		ArrayList<Court> bookedCourts = new ArrayList<Court>();
-		HtmlForm menuForm= htmlUtil.login();
+		HtmlForm menuForm= htmlUtil.login(userid, password);
 		//Calendar Page
 		HtmlPage calendarPageToday =htmlUtil.selectCourt(menuForm);
 		HtmlPage calendarPageTarget =  htmlUtil.moveTo(date, calendarPageToday);
@@ -55,7 +59,7 @@ public class CourtCancel {
 	public void cancelDay(Date date) throws Exception
 	{
 		 
-		  HtmlForm menuForm= htmlUtil.login();
+		  HtmlForm menuForm= htmlUtil.login(userid, password);
 		  //Calendar Page
 		  HtmlPage calendarPageToday =htmlUtil.selectCourt(menuForm);
 		  HtmlPage calendarPageTarget =  htmlUtil.moveTo(date, calendarPageToday);
@@ -98,17 +102,38 @@ public class CourtCancel {
 //		
 //	}
 	
+	 private String userid;
+	 private String password;
+	 
+	
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
 	
 	 public static void main (String args[]) throws Exception {
 		  
-		 try {
-			 CourtCancel canceller = new CourtCancel ();
-			 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-			 Date date = sdf.parse("13-03-2016");
-			 canceller.cancelDay(date);
-		 } catch (Exception ex){
-			 EmailSender.send(ex);
-		 }
-	  
+//		 try {
+//			 CourtCancel canceller = new CourtCancel ();
+//			 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//			 Date date = sdf.parse("13-03-2016");
+//			 canceller.cancelDay(date);
+//		 } catch (Exception ex){
+//			 EmailSender.send(ex);
+//		 }
+//	  
 	 }
 }
