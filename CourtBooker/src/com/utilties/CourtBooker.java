@@ -2,7 +2,6 @@ package com.utilties;
 
 import java.util.List;
 
-
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -27,7 +26,7 @@ public class CourtBooker {
 	 private int[] courtTimes = {30,31,54,55,56,57};
 	 
 	 private String url = "bcsynp.php?a=";
-	 private String end = "|80|9|";
+	 private String end = "|73|9|";
 	 private int courtNumber;
 	
 	 public CourtBooker (String userid, String password, int courtNumber, int startTime)  {
@@ -87,8 +86,10 @@ public class CourtBooker {
 	 public static void main (String args[]) throws Exception {
 	  
 		 try {
-		// CourtBooker booker = new CourtBooker ("http://mail.theparklangleyclub.co.uk:82/source1/index.php");
-		// booker.book ();
+			 CourtBooker booker1 = new CourtBooker ("bhatti","143113141",5,720 );
+			 booker1.book ();
+			 CourtBooker booker2 = new CourtBooker ("singh","gpsingh",5,840 );
+			 booker2.book ();
 		 } catch (Exception ex){
 			 EmailSender.send(ex);
 		 }
