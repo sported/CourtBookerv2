@@ -45,9 +45,9 @@ public class CourtBookerServlet extends HttpServlet {
       throws IOException, ServletException {
 	  
 		try {
-			 CourtBooker booker1 = new CourtBooker ("bhatti","143113141",5,720 );
+			 CourtBooker booker1 = new CourtBooker ("singh","gpsingh",5,510 );
 			 booker1.book ();
-			 CourtBooker booker2 = new CourtBooker ("singh","gpsingh",5,840 );
+			 CourtBooker booker2 = new CourtBooker ("bhatti","143113141",5,630 );
 			 booker2.book ();
 			 resp.getWriter().println("Done");
 			 
