@@ -2,7 +2,7 @@
 <cronentries>
   <cron>
     <url>/courtbooker</url>
-    <schedule>every saturday, sunday 00:05</schedule>
+    <schedule>every saturday, sunday 00:01</schedule>
     <timezone>Europe/London</timezone>
   </cron>
   <cron>

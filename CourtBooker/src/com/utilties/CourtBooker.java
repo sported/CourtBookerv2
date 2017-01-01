@@ -29,11 +29,11 @@ public class CourtBooker {
 	 private String end = "|73|9|";
 	 private int courtNumber;
 	
-	 public CourtBooker (String userid, String password, int courtNumber, int startTime)  {
+	 public CourtBooker (String userid, String password, int courtNumber, double startTime)  {
 		 this.userid= userid;
 		 this.password = password;
 		 this.courtNumber= courtNumber;
-		 this.startTime = startTime;
+		 this.startTime = (int) startTime*60;
 	 
 	 }
 	 

@@ -20,7 +20,7 @@ public class EmailSender {
 	private static String USER_NAME = "courts.booker";  // GMail user name (just the part before "@gmail.com")
     private static String PASSWORD = "gpsingh123"; // GMail password
     private static String RECIPIENT = "s.gurprit@gmail.com";
-    private static String RECIPIENT2 = "Schyok@hotmail.com";
+   // private static String RECIPIENT2 = "Schyok@hotmail.com";
     private static String FROM = "courts.booker@gmail.com";
     private static String REPLY = "reply@courtbooker001.appspotmail.com";
     
@@ -49,8 +49,8 @@ public class EmailSender {
 	       msg.setFrom(new InternetAddress(FROM, FROM_NAME));
 	       msg.addRecipient(Message.RecipientType.TO,
 	        new InternetAddress(RECIPIENT));
-	       msg.addRecipient(Message.RecipientType.TO,
-	   	        new InternetAddress(RECIPIENT2));
+//	       msg.addRecipient(Message.RecipientType.TO,
+//	   	        new InternetAddress(RECIPIENT2));
 	       msg.setSubject(subject);
 	       msg.setReplyTo(new InternetAddress[]{new InternetAddress(REPLY)});
 	       msg.setText(body);
