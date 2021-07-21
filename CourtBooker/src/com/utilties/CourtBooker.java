@@ -26,7 +26,7 @@ public class CourtBooker {
 	 private int[] courtTimes = {30,31,54,55,56,57};
 	 
 	 private String url = "bcsynp.php?a=";
-	 private String end = "|73|9|";
+	 private String end = "|80|9|167|";
 	 private int courtNumber;
 	
 	 public CourtBooker (String userid, String password, int courtNumber, double startTime)  {
@@ -44,8 +44,8 @@ public class CourtBooker {
 	 
 	  //Calendar Page
 	  HtmlPage calendarPage =htmlUtil.selectCourt(menuForm);
-	  HtmlPage calendarPage2Weeks = htmlUtil.nextWeek(htmlUtil.nextWeek(calendarPage));
-	  int numberSlot = 4;
+	  HtmlPage calendarPage2Weeks = htmlUtil.nextWeek(calendarPage);
+	  int numberSlot = 2;
 	  for (int i=0; i<numberSlot; i++) {
 		  String courtTime = url+Integer.toString(courtTimes[courtNumber-1])+"|"+Integer.toString(startTime)+end;
 		  calendarPage2Weeks = bookCourt(calendarPage2Weeks, courtTime);
@@ -77,7 +77,16 @@ public class CourtBooker {
 		  HtmlForm goBackForm = (HtmlForm) goBackPage.getFormByName("Form");
 		  HtmlSubmitInput okBtn = (HtmlSubmitInput) goBackForm.getInputByName("BtnOK");
 		  
-		  HtmlPage resultPage = (HtmlPage) okBtn.click();
+		  HtmlPage returnPage = (HtmlPage) okBtn.click();
+		  
+		  
+		  
+		  HtmlForm returnForm= (HtmlForm) returnPage.getFormByName("Form");
+		  HtmlSubmitInput returnBtn = (HtmlSubmitInput) returnForm.getInputByName("BtnReturn");
+		  
+		  HtmlPage resultPage = (HtmlPage) returnBtn.click();
+		  
+		  
 		  return resultPage;
 	 }
 			 
@@ -86,12 +95,13 @@ public class CourtBooker {
 	 public static void main (String args[]) throws Exception {
 	  
 		 try {
-			 CourtBooker booker1 = new CourtBooker ("bhatti","143113141",5,720 );
-			 booker1.book ();
-			 CourtBooker booker2 = new CourtBooker ("singh","gpsingh",5,840 );
+			 //CourtBooker booker1 = new CourtBooker ("bhatti","143113141",5,720 );
+			// booker1.book ();
+			 CourtBooker booker2 = new CourtBooker ("singh","gpsingh",3,8);
 			 booker2.book ();
 		 } catch (Exception ex){
-			 EmailSender.send(ex);
+			 ex.printStackTrace();
+			// EmailSender.send(ex);
 		 }
 	 
 	 }
@@ -132,5 +142,8 @@ public class CourtBooker {
 		this.courtNumber = courtNumber;
 	}
 
+	
+	
+	
 	 
 }

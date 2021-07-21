@@ -14,21 +14,14 @@
 
 package com.utilties;
 
-import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
-import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.appengine.auth.oauth2.AbstractAppEngineAuthorizationCodeServlet;
-import com.google.api.services.gmail.Gmail;
-import com.utilties.util.EmailSender;
-import com.utilties.util.gmail.GmailSender;
-import com.utilties.util.gmail.Utils;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.utilties.util.EmailSender;
 
 /**
  * Entry sevlet for the Plus App Engine Sample. Demonstrates how to make an authenticated API call
@@ -45,7 +38,7 @@ public class CourtBookerServlet extends HttpServlet {
       throws IOException, ServletException {
 	  
 		try {
-			 CourtBooker booker1 = new CourtBooker ("singh","gpsingh",6,10 );
+			 CourtBooker booker1 = new CourtBooker ("singh","gpsingh",3,7 );
 			 booker1.book ();
 			 //CourtBooker booker2 = new CourtBooker ("bhatti","143113141",5,12.5 );
 			// booker2.book ();

@@ -36,7 +36,7 @@ public class CourtCancel {
 		  for(int courtNumber : Court.courtArray){
 			  for (int courtTime = CourtUtil.START_TIME; courtTime<=CourtUtil.END_TIME; courtTime=courtTime+30){
 				  HtmlForm calendarForm = (HtmlForm) calendarPageTarget.getFormByName("Form");
-				  String url = "vbdt.php?a="+String.valueOf(courtNumber)+"|"+String.valueOf(courtTime)+"|";
+				  String url = "mbdopd.php?a="+String.valueOf(courtNumber)+"|"+String.valueOf(courtTime)+"|";
 				//  System.out.println("URL is " + url);
 				  List<HtmlAnchor> links = calendarForm.getElementsByAttribute("a", "HREF", url); 
 				  if(links.size()>0){
@@ -46,6 +46,8 @@ public class CourtCancel {
 			  }
 		  }
 		 
+		  System.out.println("Courts Booked?" + bookedCourts.size());
+		  
 	  // update the flag on last court
 		  if(bookedCourts.size()>1){
 			bookedCourts.get(bookedCourts.size()-1).setLast(true);
@@ -126,14 +128,15 @@ public class CourtCancel {
 	
 	 public static void main (String args[]) throws Exception {
 		  
-//		 try {
-//			 CourtCancel canceller = new CourtCancel ();
-//			 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//			 Date date = sdf.parse("13-03-2016");
-//			 canceller.cancelDay(date);
-//		 } catch (Exception ex){
-//			 EmailSender.send(ex);
-//		 }
-//	  
+	 try {
+			 CourtCancel canceller = new CourtCancel("singh","gpsingh");
+			 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			 Date date = sdf.parse("21-07-2021");
+			 canceller.cancelDay(date);
+		 } catch (Exception ex){
+			 ex.printStackTrace();
+			 EmailSender.send(ex);
+		 }
+	  
 	 }
 }

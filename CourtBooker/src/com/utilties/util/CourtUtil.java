@@ -5,6 +5,7 @@ import java.util.Date;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
@@ -12,17 +13,25 @@ public class CourtUtil {
 	public static int START_TIME = 420;
 	public static int END_TIME = 1240;
 //	public static int[] COURT_NUMBERS = {30,31,54,55,56,57};
-	public static String LOGIN_URL  = "http://mail.theparklangleyclub.co.uk:82/source1/index.php";
+	public static String LOGIN_URL  = "https://booking.theparklangleyclub.co.uk:4443/source1/index.php";
 	
 	public HtmlForm login (String userId, String password ) throws Exception
 	{
 		  WebClient wb = new WebClient ();
-		  HtmlPage p = (HtmlPage) wb.getPage(LOGIN_URL);
+		  wb.getOptions().setThrowExceptionOnScriptError(false);
+		  HtmlPage landingPage = (HtmlPage) wb.getPage(LOGIN_URL);
+		  HtmlForm landingform = landingPage.getFormByName("Form");
+		  HtmlSubmitInput singIn = (HtmlSubmitInput) landingform.getInputByName("Btn_SignIn");
+		  
+		  HtmlPage loginPage = (HtmlPage) singIn.click();
+		  
+		  
 		 
-		  HtmlForm f = p.getFormByName("Form");
-		  HtmlTextInput logonU = (HtmlTextInput) f.getInputByName("LogonU");
-		  HtmlTextInput logonPW = (HtmlTextInput) f.getInputByName("LogonPW");
-		  HtmlSubmitInput submit = (HtmlSubmitInput) f.getInputByName("logonSubmit");
+		  HtmlForm f = loginPage.getFormByName("Form");
+		 // System.out.println(f.);
+		  HtmlTextInput logonU = (HtmlTextInput) f.getInputByName("Username");
+		  HtmlPasswordInput logonPW = (HtmlPasswordInput) f.getInputByName("Password");
+		  HtmlSubmitInput submit = (HtmlSubmitInput) f.getInputByName("BtnSubmit");
 		  
 		  logonU.setValueAttribute(userId);
 		  logonPW.setValueAttribute(password);
@@ -30,7 +39,13 @@ public class CourtUtil {
 //		  logonU.setValueAttribute("bhatti");
 //		  logonPW.setValueAttribute("143113141");
 		  
-		  HtmlPage menuPage = (HtmlPage) submit.click();
+		  HtmlPage confPage = (HtmlPage) submit.click();
+		  HtmlForm coonfForm= confPage.getFormByName("Form");
+		  
+		  HtmlSubmitInput ok = (HtmlSubmitInput) coonfForm.getInputByName("BtnOK");
+		  
+		  
+		  HtmlPage menuPage = (HtmlPage) ok.click();
 		  HtmlForm menuForm= menuPage.getFormByName("Form");
 		  return menuForm;
 	}

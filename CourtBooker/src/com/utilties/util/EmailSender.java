@@ -41,8 +41,13 @@ public class EmailSender {
    
    public static void send(String subject, String body)throws Exception{
 	   Properties props = new Properties();
-	   Session session = Session.getDefaultInstance(props, null);
-
+	   
+//   props.put("mail.smtp.host", "smtp.gmail.com");
+//       props.put("mail.smtp.port", "587");
+//       props.put("mail.smtp.auth", "true");
+//       props.put("mail.smtp.starttls.enable", "true"); //TLS
+	   
+       Session session = Session.getDefaultInstance(props, null);
 	  
 	 
 	       Message msg = new MimeMessage(session);
@@ -54,8 +59,14 @@ public class EmailSender {
 	       msg.setSubject(subject);
 	       msg.setReplyTo(new InternetAddress[]{new InternetAddress(REPLY)});
 	       msg.setText(body);
-	       Transport.send(msg); 
-
+	       
+	      // System.out.println(msg.toString());
+	       
+//	       Transport transport = session.getTransport("smtp");
+//	       transport.connect("smtp.gmail.com", 587, USER_NAME, PASSWORD);
+//	       transport.sendMessage(msg, msg.getAllRecipients());
+//	       transport.close();
+	       Transport.send(msg);
 	  
    }
    
